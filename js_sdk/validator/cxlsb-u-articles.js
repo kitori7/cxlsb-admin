@@ -14,18 +14,6 @@ const validator = {
     "label": "标题",
     "title": "标题"
   },
-  "content": {
-    "rules": [
-      {
-        "required": true
-      },
-      {
-        "format": "string"
-      }
-    ],
-    "label": "文章内容",
-    "title": "文章内容"
-  },
   "article_status": {
     "rules": [
       {
@@ -59,6 +47,18 @@ const validator = {
     ],
     "label": "封面大图",
     "title": "封面大图"
+  },
+  "content": {
+    "rules": [
+      {
+        "required": true
+      },
+      {
+        "format": "string"
+      }
+    ],
+    "label": "文章内容",
+    "title": "文章内容"
   }
 }
 

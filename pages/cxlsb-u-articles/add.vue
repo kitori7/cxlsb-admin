@@ -4,14 +4,14 @@
       <uni-forms-item name="title" label="标题" required>
         <uni-easyinput placeholder="标题" v-model="formData.title" trim="both"></uni-easyinput>
       </uni-forms-item>
-      <uni-forms-item name="content" label="文章内容" required>
-        <uni-easyinput type="textarea" autoHeight="true" placeholder="文章内容" v-model="formData.content" trim="right"></uni-easyinput>
-      </uni-forms-item>
       <uni-forms-item name="article_status" label="文章状态">
         <uni-data-checkbox v-model="formData.article_status" :localdata="formOptions.article_status_localdata"></uni-data-checkbox>
       </uni-forms-item>
       <uni-forms-item name="avatar" label="封面大图" required>
-        <uni-file-picker file-mediatype="image" file-extname="jpg,png" return-type="object" v-model="formData.avatar"></uni-file-picker>
+        <uni-file-picker file-mediatype="image" file-extname="jpg,png,jpeg" return-type="object" v-model="formData.avatar"></uni-file-picker>
+      </uni-forms-item>
+      <uni-forms-item name="content" label="文章内容" required>
+        <uni-easyinput type="textarea" :autoHeight="true" :maxlength="-1" placeholder="文章内容" v-model="formData.content" trim="right"></uni-easyinput>
       </uni-forms-item>
       <view class="uni-button-group">
         <button type="primary" class="uni-button" style="width: 100px;" @click="submit">提交</button>
@@ -46,9 +46,9 @@
     data() {
       let formData = {
         "title": "",
-        "content": "",
         "article_status": 0,
-        "avatar": null
+        "avatar": null,
+        "content": ""
       }
       return {
         formData,
