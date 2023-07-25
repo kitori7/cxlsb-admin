@@ -1,32 +1,17 @@
 <template>
   <view class="uni-container">
     <uni-forms ref="form" :model="formData" validateTrigger="bind">
-      <uni-forms-item name="user_id" label="">
-        <uni-easyinput placeholder="文章作者ID， 参考`uni-id-users` 表" v-model="formData.user_id"></uni-easyinput>
-      </uni-forms-item>
       <uni-forms-item name="title" label="标题" required>
         <uni-easyinput placeholder="标题" v-model="formData.title" trim="both"></uni-easyinput>
       </uni-forms-item>
       <uni-forms-item name="content" label="文章内容" required>
-        <uni-easyinput placeholder="文章内容" v-model="formData.content" trim="right"></uni-easyinput>
-      </uni-forms-item>
-      <uni-forms-item name="excerpt" label="文章摘录">
-        <uni-easyinput placeholder="文章摘录" v-model="formData.excerpt" trim="both"></uni-easyinput>
+        <uni-easyinput type="textarea" autoHeight="true" placeholder="文章内容" v-model="formData.content" trim="right"></uni-easyinput>
       </uni-forms-item>
       <uni-forms-item name="article_status" label="文章状态">
         <uni-data-checkbox v-model="formData.article_status" :localdata="formOptions.article_status_localdata"></uni-data-checkbox>
       </uni-forms-item>
-      <uni-forms-item name="comment_status" label="开放评论">
-        <uni-data-checkbox v-model="formData.comment_status" :localdata="formOptions.comment_status_localdata"></uni-data-checkbox>
-      </uni-forms-item>
       <uni-forms-item name="avatar" label="封面大图" required>
-        <uni-easyinput placeholder="缩略图地址" v-model="formData.avatar" trim="both"></uni-easyinput>
-      </uni-forms-item>
-      <uni-forms-item name="publish_date" label="发表时间">
-        <uni-datetime-picker return-type="timestamp" v-model="formData.publish_date"></uni-datetime-picker>
-      </uni-forms-item>
-      <uni-forms-item name="last_modify_date" label="最后修改时间">
-        <uni-datetime-picker return-type="timestamp" v-model="formData.last_modify_date"></uni-datetime-picker>
+        <uni-file-picker file-mediatype="image" file-extname="jpg,png" return-type="object" v-model="formData.avatar"></uni-file-picker>
       </uni-forms-item>
       <view class="uni-button-group">
         <button type="primary" class="uni-button" style="width: 100px;" @click="submit">提交</button>
@@ -60,15 +45,10 @@
   export default {
     data() {
       let formData = {
-        "user_id": "",
         "title": "",
         "content": "",
-        "excerpt": "",
         "article_status": 0,
-        "comment_status": null,
-        "avatar": "",
-        "publish_date": null,
-        "last_modify_date": null
+        "avatar": null
       }
       return {
         formData,
@@ -81,16 +61,6 @@
             {
               "value": 1,
               "text": "已发布"
-            }
-          ],
-          "comment_status_localdata": [
-            {
-              "value": 0,
-              "text": "关闭"
-            },
-            {
-              "value": 1,
-              "text": "开放"
             }
           ]
         },
@@ -153,7 +123,7 @@
         uni.showLoading({
           mask: true
         })
-        db.collection(dbCollectionName).doc(id).field("user_id,title,content,excerpt,article_status,comment_status,avatar,publish_date,last_modify_date").get().then((res) => {
+        db.collection(dbCollectionName).doc(id).field("title,content,article_status,avatar").get().then((res) => {
           const data = res.result.data[0]
           if (data) {
             this.formData = data

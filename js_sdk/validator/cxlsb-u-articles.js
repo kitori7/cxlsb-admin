@@ -2,16 +2,6 @@
 
 
 const validator = {
-  "user_id": {
-    "rules": [
-      {
-        "format": "string"
-      }
-    ],
-    "defaultValue": {
-      "$env": "uid"
-    }
-  },
   "title": {
     "rules": [
       {
@@ -36,15 +26,6 @@ const validator = {
     "label": "文章内容",
     "title": "文章内容"
   },
-  "excerpt": {
-    "rules": [
-      {
-        "format": "string"
-      }
-    ],
-    "label": "摘要",
-    "title": "文章摘录"
-  },
   "article_status": {
     "rules": [
       {
@@ -67,62 +48,17 @@ const validator = {
     "defaultValue": 0,
     "label": "文章状态"
   },
-  "comment_status": {
-    "rules": [
-      {
-        "format": "int"
-      },
-      {
-        "range": [
-          {
-            "value": 0,
-            "text": "关闭"
-          },
-          {
-            "value": 1,
-            "text": "开放"
-          }
-        ]
-      }
-    ],
-    "title": "开放评论",
-    "label": "开放评论"
-  },
   "avatar": {
     "rules": [
       {
         "required": true
       },
       {
-        "format": "string"
+        "format": "file"
       }
     ],
     "label": "封面大图",
     "title": "封面大图"
-  },
-  "publish_date": {
-    "rules": [
-      {
-        "format": "timestamp"
-      }
-    ],
-    "title": "发表时间",
-    "defaultValue": {
-      "$env": "now"
-    },
-    "label": "发表时间"
-  },
-  "last_modify_date": {
-    "rules": [
-      {
-        "format": "timestamp"
-      }
-    ],
-    "title": "最后修改时间",
-    "defaultValue": {
-      "$env": "now"
-    },
-    "label": "最后修改时间"
   }
 }
 
@@ -130,10 +66,6 @@ const enumConverter = {
   "article_status_valuetotext": {
     "0": "草稿箱",
     "1": "已发布"
-  },
-  "comment_status_valuetotext": {
-    "0": "关闭",
-    "1": "开放"
   }
 }
 
